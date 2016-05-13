@@ -1,0 +1,44 @@
+﻿很快/I-P1	，/OT	好吃/I-P1	，/OT
+味道/I-E	足/I-P1	，/OT
+量/I-E	大/I-P1
+没有/B-N2	送水/E-N2	,/OT
+没有/B-N2	送水/E-N2	,/OT
+没有/B-N2	送水/E-N2
+非常/B-P1	快/E-P1	，/OT
+态度/I-E	好/I-P1	。/OT
+方便/I-P1	，/OT
+快捷/I-P1	，/OT
+味道/I-E	可口/I-P1	，/OT
+快递/I-E	给/B-P1	力/E-P1
+菜/B-E	味道/E-E	很/B-P1	棒/E-P1	！/OT
+送餐/I-E	很/B-P1	及时/E-P1	！/OT
+送餐/I-E	快/I-P1	,/OT
+态度/I-E	也/OT	特别/B-P1	好/E-P1	,/OT
+辛苦/B-P1	啦/E-P1	谢谢/I-P2
+超级/B-P1	快/E-P1	就/OT	送到/OT	了/OT	，/OT
+这么/OT	冷/OT	的/OT	天气/OT	骑士/B-E	们/E-E	辛苦/B-P1	了/E-P1	。/OT
+谢谢/B-P2	你们/E-P2	。/OT
+麻辣/B-E	香/M-E	锅/E-E	依然/B-P1	很/M-P1	好吃/E-P1	。/OT
+经过/OT	上次/OT	晚/OT	了/OT	2/OT	小时/OT	，/OT
+这次/OT	超级/B-P1	快/E-P1	，/OT
+20/B-P2	分钟/M-P2	就/M-P2	送到/M-P2	了/E-P2	…/OT	…/OT
+最后/OT	五分钟/OT	订/OT	的/OT	，/OT
+卖家/I-E	特别/B-P1	好/E-P1	接/OT	单/OT	了/OT	，/OT
+谢谢/I-P2	。/OT
+量/I-E	大/I-P1	，/OT
+好吃/I-P1	，/OT
+每次/B-P2	点/M-P2	的/M-P2	都/M-P2	够/M-P2	吃/M-P2	两次/E-P2
+挺/OT	辣/OT	的/OT	，/OT
+吃着/OT	还/B-P1	可以/E-P1	吧/OT
+味道/I-E	好/I-P1	，/OT
+送餐/I-E	快/I-P1	，/OT
+分量/I-E	足/I-P1
+量/I-E	足/I-P1	，/OT
+好吃/I-P1	，/OT
+送餐/I-E	也/OT	快/I-P1
+特别/B-P1	好吃/E-P1	，/OT
+量/I-E	特大/I-P1	，/OT
+而且/OT	送餐/I-E	特别快/I-P1	，/OT
+特别/B-P1	特别/M-P1	棒/E-P1
+口感/I-E	好/B-P1	的/M-P1	很/E-P1	，/OT
+速度/I-E	快/I-P1	！/OT
