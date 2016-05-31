@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 
-from fgom.corpus import *
-from fgom import HMM
+from fgom2.corpus import *
+from fgom2 import HMM
 
 
 def test_GetToTagCorpus():
@@ -32,13 +33,13 @@ def test_train_OpinionMinerHMM():
 
     HMM.train(corpus_filename)
 
-    sentence = "味道好，送餐快，分量足"
+    sentence = u"味道好，送餐快，分量足"
     print(HMM.tag(sentence))
     print(["%s/%s" % (word, tag) for word, tag in HMM.tag(sentence, False)])
 
 
 def test_use_OpinionMinerHMM():
-    sentence = "味道好，送餐快，分量足"
+    sentence = u"味道好，送餐快，分量足"
     print(HMM.tag(sentence))
     print(["%s/%s" % (word, tag) for word, tag in HMM.tag(sentence, False)])
 
@@ -49,6 +50,6 @@ if __name__ == "__main__":
     # test_GetToTagCorpus()
     # test_GetTaggedCorpus()
     # test_BootstrappingMaster()
-    # test_train_OpinionMinerHMM()
+    test_train_OpinionMinerHMM()
     test_use_OpinionMinerHMM()
 

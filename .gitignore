@@ -1,3 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 /.idea
 
+fgom/__pycache__/
+fgom2/HMM.pyc
+fgom2/__init__.pyc
+fgom2/common_lib.pyc
+fgom2/corpus.pyc

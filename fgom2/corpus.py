@@ -1,15 +1,19 @@
-# -*- coding: <encoding name> -*-
+# -*- coding: utf-8 -*-
 
 import re
 import os
 import math
 from random import choice
 
-from fgom import common_lib
+from fgom2 import common_lib
+
+
+import sys
+reload(sys)
+sys.setdefaultencoding( "utf-8" )
+
 
 root_path = os.getcwd()
-
-
 class GetToTagCorpus:
     def __init__(self, input_filename, output_filepath, start=0, end=-1, gap=10):
         """
@@ -31,19 +35,18 @@ class GetToTagCorpus:
         self._gap = gap
 
     def run(self):
-        with open(self._input_filename, encoding="utf-8") as readf:
+        with open(self._input_filename) as readf:
             i = 0
             for line in readf:
                 if i >= self._start:
                     # get the clauses
-                    clauses = common_lib.re_clause_findall.findall(line.strip())
+                    clauses = common_lib.re_clause_findall.findall(line.strip().decode("utf-8"))
 
                     # write the clause's segments
-                    with open(self._output_filepath % ((i - self._start) // self._gap),
-                              "a", encoding="utf-8") as writef:
+                    with open(self._output_filepath % ((i - self._start) // self._gap), 'a') as writef:
                         for clause in clauses:
-                            segments = common_lib.cut(clause)
-                            writef.write("%s\n" % "\t".join([segment + "/" for segment in segments]))
+                            segments = common_lib.cut(clause.decode("utf-8"))
+                            writef.write("%s\n" % "\t".join([segment + "/" for segment in segments]).encode("utf-8"))
                         writef.write("\n" * 2)
 
                 i += 1
@@ -59,11 +62,11 @@ class GetTaggedCorpus:
         self.default = default
 
     def run(self):
-        with open(self.output_filename, "w", encoding='utf-8') as writef:
+        with open(self.output_filename, "w") as writef:
             for file in os.listdir(self.input_filepath):
                 # get all lines
-                with open(os.path.join(self.input_filepath, file), encoding="utf-8") as readf:
-                    lines = [line.strip() for line in readf.readlines()]
+                with open(os.path.join(self.input_filepath, file)) as readf:
+                    lines = [line.strip().decode("utf-8") for line in readf.readlines()]
 
                 # analyse each line
                 line_no = 0
@@ -104,7 +107,7 @@ class GetTaggedCorpus:
                                     runout += "%s/%s\t" % (words[i], "M-" + tags[i])
 
                         if runout and not common_lib.re_han_match.match(words[-1]):
-                            writef.write("%s\n" % runout.strip())
+                            writef.write("%s\n" % runout.strip().encode("utf-8"))
                             runout = ""
 
                     line_no += 1
@@ -134,10 +137,10 @@ class BootstrappingHMM:
         pattern = re.compile("\s+")
 
         # open the file, read each line one by one
-        with open(filepath, encoding="utf-8") as f:
+        with open(filepath) as f:
             for line in f:
                 # split the line into the several splits
-                splits = pattern.split(line.strip())
+                splits = pattern.split(line.strip().decode("utf-8"))
 
                 # establish two lists to record the word and the tag
                 line_words = []
@@ -289,9 +292,9 @@ class BootstrappingMaster:
             os.remove(self.hmm2_filepath)
 
     def load_bootstrap(self):
-        with open(self.bootstrapping_corpus_filepath, encoding="utf-8") as bootstrap_f:
+        with open(self.bootstrapping_corpus_filepath) as bootstrap_f:
             for line in bootstrap_f:
-                self.bootstrap_contents.append(line.strip())
+                self.bootstrap_contents.append(line.strip().decode("utf-8"))
 
     @staticmethod
     def check_filepath(filepath):
@@ -305,12 +308,14 @@ class BootstrappingMaster:
         if self.check_filepath(self.train_corpus_filepath):
             print("Distributing.")
 
-            os.makedirs("/".join(self.hmm1_filepath.split("/")[:-1]))
+            path = "/".join(self.hmm1_filepath.split("/")[:-1])
+            if not os.path.exists(path):
+                os.makedirs()
 
-            hmm1_file = open(self.hmm1_filepath, "w", encoding="utf-8")
-            hmm2_file = open(self.hmm2_filepath, "w", encoding="utf-8")
+            hmm1_file = open(self.hmm1_filepath, "w")
+            hmm2_file = open(self.hmm2_filepath, "w")
 
-            with open(self.train_corpus_filepath, encoding="utf-8") as f:
+            with open(self.train_corpus_filepath) as f:
                 contents = f.readlines()
             index_list = list(range(len(contents)))
 
@@ -320,10 +325,10 @@ class BootstrappingMaster:
                 index = choice(index_list)
                 index_list.remove(index)
                 if turn == 0:
-                    hmm1_file.write("%s" % contents[index])
+                    hmm1_file.write("%s" % contents[index].decode("utf-8").encode("utf-8"))
                     turn += 1
                 else:
-                    hmm2_file.write("%s" % contents[index])
+                    hmm2_file.write("%s" % contents[index].decode("utf-8").encode("utf-8"))
                     turn = 0
 
             hmm1_file.close()
@@ -341,12 +346,12 @@ class BootstrappingMaster:
 
             # tag each test corpus
             # if two tags are equal, then add it into corpus file, and change the state of self.added
-            with open(self.train_corpus_filepath, 'a', encoding="utf-8") as train_f:
+            with open(self.train_corpus_filepath, 'a') as train_f:
                 for line in self.bootstrap_contents:
                     hmm1_tags = []
                     hmm2_tags = []
                     clauses = []
-                    for clause in common_lib.re_clause_findall.findall(line.strip()):
+                    for clause in common_lib.re_clause_findall.findall(line.strip().decode("utf-8")):
                         segments = common_lib.cut(clause)
                         clauses.append(segments)
                         hmm1_tags.append(self.hmm1.tag(segments, tag_only=True))
@@ -361,7 +366,7 @@ class BootstrappingMaster:
                             for j in range(len(hmm1_tags[i])):
                                 content += "%s/%s\t" % (clauses[i][j], hmm1_tags[i][j])
                             runout += "%s\n" % content.strip()
-                        train_f.write("%s\n" % runout.strip())
+                        train_f.write("%s\n" % runout.strip().encode("utf-8"))
                         self.bootstrap_contents.remove(line)
 
             print("Length of remaining corpus: %d" % len(self.bootstrap_contents))
@@ -371,6 +376,5 @@ class BootstrappingMaster:
             else:
                 # change the sate of self.added
                 self.added = False
-
 
 

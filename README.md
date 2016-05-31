@@ -110,7 +110,47 @@ origin_tag_filename： 已标记corpus
     output_filepath = "files/tag_corpus/"
     fgom.get_to_tag_corpus(input_filename, output_filepath)
 
-然后进行词性标注。标注方式如下：
+然后进行词性标注。要求的标注方式如下：
+
+    E：Entity，实体、属性；
+        I-E：Independent Entity
+        B-E：Begining of the Entity
+        M-E：Middle of the Entity
+        E-E：End of the Entity
+    P1：explicit positive sentiment words
+        I-P1
+        B-P1
+        M-P1
+        E-P1
+    P2：implicit positive sentiment words， or positive description
+        I-P2
+        B-P2
+        M-P2
+        E-P2
+    N1：explicit negative sentiment words
+        I-N1
+        B-N1
+        M-N1
+        E-N1
+    N2：implicit negative sentiment words， or negative description
+        I-N2
+        B-N2
+        M-N2
+        E-N2
+    OT：others
+        I-OT
+        B-OT
+        M-OT
+        E-OT
+    
+而手工进行标注的方式，只要求标注：
+    
+    E
+    P1
+    P2
+    N1
+    N2
+    
 
 第二步： get tagged_corpus
 
