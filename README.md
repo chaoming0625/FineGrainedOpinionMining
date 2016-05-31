@@ -8,7 +8,7 @@
 做序列标注
 - fgom
 适用于 python3
-- fgom
+- fgom2
 适用于 python2
 
 # corpus.py
