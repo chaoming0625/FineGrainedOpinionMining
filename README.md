@@ -6,6 +6,10 @@
 处理语料
 - HMM.py
 做序列标注
+- fgom
+适用于 python3
+- fgom
+适用于 python2
 
 # corpus.py
 - class GetToTagCorpus
