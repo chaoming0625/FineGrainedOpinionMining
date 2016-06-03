@@ -75,7 +75,7 @@
 ### class OpinionMinerHMM
 前面都是准备工作，这一步就是最重要的。首次需要初始化，提供train corpus，然后进行训练，训练结果会写进文件内，下次使用不需要再次训练。
 
-1. 初次使用
+- 初次使用
 
 
     
@@ -93,7 +93,7 @@
     ['I-E', 'I-P1', 'OT', 'I-E', 'I-P1', 'OT', 'I-E', 'I-P1']
     ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
     
-2. 下次使用
+- 下次使用
 
 
 
@@ -112,7 +112,7 @@
     ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
     {'pos1': ['好', '快', '足'], 'neg2': [], 'entity': ['味道', '送餐', '分量'], 'neg1': [], 'pos2': []}
     
-3. 再次训练，与初次使用一致。
+- 再次训练，与初次使用一致。
 
 
 
@@ -121,7 +121,7 @@
     HMM.train(corpus_filename)
 
 
-# 实际使用
+# 二、实际使用
 ## 第一步： get to_tag_corpus
 
     import fgom
@@ -162,7 +162,9 @@
         B-OT
         M-OT
         E-OT
-    
+ 
+ ![biaozhu1](test/pic/biaozhu1.PNG)
+ 
 而手工进行标注的方式，只要求标注：
     
     E
@@ -170,7 +172,8 @@
     P2
     N1
     N2
-    
+
+![biaozhu2](test/pic/biaozhu2.PNG)
 
 ## 第二步： get tagged_corpus
 
@@ -207,3 +210,8 @@
     
     ['I-E', 'I-P1', 'OT', 'I-E', 'I-P1', 'OT', 'I-E', 'I-P1']
     ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
+
+# 三、实例Demo
+一个外卖领域的细粒度挖掘系统：[WaiMaiOpinionMiner](https://github.com/chaoming0625/WaiMaiOpinionMiner)
+
+
