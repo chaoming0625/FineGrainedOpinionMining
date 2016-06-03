@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
+import sys
 
-from fgom2.corpus import *
-from fgom2 import HMM
+PY2 = sys.version_info[0] == 2
+
+if PY2:
+    from fgom2.corpus import *
+    from fgom2 import HMM
+else:
+    from fgom.corpus import *
+    from fgom import HMM
 
 
 def test_GetToTagCorpus():
@@ -51,5 +58,5 @@ if __name__ == "__main__":
     # test_GetTaggedCorpus()
     # test_BootstrappingMaster()
     test_train_OpinionMinerHMM()
-    test_use_OpinionMinerHMM()
+    # test_use_OpinionMinerHMM()
 

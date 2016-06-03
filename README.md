@@ -1,5 +1,9 @@
 
-# 介绍
+# 一、介绍
+## 1、目的
+通过四个步骤，即可完成一个特定领域的细粒度情感分析！
+
+## 2、文件概述
 - common_lib.py
 提供常用方法（比如分词）和constants（比如正则、文件夹路径）
 - corpus.py
@@ -11,14 +15,15 @@
 - fgom2
 适用于 python2
 
-# corpus.py
-- class GetToTagCorpus
-得到需要标记的corpus。
-    input_filename: 需要标记的语料文件readf
-    output_filepath: 输出文件夹
-    start: readf从哪一行开始输出
-    end: readf从哪一行结束输出
-    gap: 多少语料数写进一个文件
+## 3、corpus.py
+### class GetToTagCorpus
+—— 得到需要标记的corpus。
+
+- input_filename: 需要标记的语料文件readf
+- output_filepath: 输出文件夹
+- start: readf从哪一行开始输出
+- end: readf从哪一行结束输出
+- gap: 多少语料数写进一个文件
 
 运行实例
     
@@ -30,11 +35,12 @@
     corpus = GetToTagCorpus(input_filename, output_filepath)
     corpus.run()
 
-- class GetTaggedCorpus
-将已经人工标记了的corpus转换成标准形式。
-input_filepath： 人工标记
-output_filename: 输出文件名
-default='OT'： 对于没有标记的token，默认是default标签
+### class GetTaggedCorpus
+—— 将已经人工标记了的corpus转换成标准形式。
+
+- input_filepath： 人工标记
+- output_filename: 输出文件名
+- default='OT'： 对于没有标记的token，默认是default标签
 
 运行实例
 
@@ -46,13 +52,14 @@ default='OT'： 对于没有标记的token，默认是default标签
     corpus = GetTaggedCorpus(input_filepath, output_filename)
     corpus.run()
 
-- class BootstrappingHMM
-做bootstrapping的HMM。在class BootstrappingMaster里用到。
+### class BootstrappingHMM
+—— 做bootstrapping的HMM。在class BootstrappingMaster里用到。
 
-- class BootstrappingMaster
-目的，扩大训练样本。
-bootstrapping_filename： 未标记的corpus
-origin_tag_filename： 已标记corpus
+### class BootstrappingMaster
+—— 目的，扩大训练样本。
+
+- bootstrapping_filename： 未标记的corpus
+- origin_tag_filename： 已标记corpus
 
 运行实例
     
@@ -64,11 +71,14 @@ origin_tag_filename： 已标记corpus
     bootstrap = BootstrappingMaster(bootstrapping_filename, origin_tag_filename)
     bootstrap.run()
 
-# HMM.py
-- class OpinionMinerHMM
+## 4、HMM.py
+### class OpinionMinerHMM
 前面都是准备工作，这一步就是最重要的。首次需要初始化，提供train corpus，然后进行训练，训练结果会写进文件内，下次使用不需要再次训练。
 
-1、初次使用
+1. 初次使用
+
+
+    
     
     from fgom import HMM
     
@@ -83,8 +93,11 @@ origin_tag_filename： 已标记corpus
     ['I-E', 'I-P1', 'OT', 'I-E', 'I-P1', 'OT', 'I-E', 'I-P1']
     ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
     
-2、下次使用
-    
+2. 下次使用
+
+
+
+
     from fgom import HMM
     
     sentence = "味道好，送餐快，分量足"
@@ -99,14 +112,17 @@ origin_tag_filename： 已标记corpus
     ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
     {'pos1': ['好', '快', '足'], 'neg2': [], 'entity': ['味道', '送餐', '分量'], 'neg1': [], 'pos2': []}
     
-3、再次训练，与初次使用一致。
-    
+3. 再次训练，与初次使用一致。
+
+
+
+
     corpus_filename = "files/hmm_train_corpus.txt"
     HMM.train(corpus_filename)
 
 
 # 实际使用
-第一步： get to_tag_corpus
+## 第一步： get to_tag_corpus
 
     import fgom
     
@@ -156,7 +172,7 @@ origin_tag_filename： 已标记corpus
     N2
     
 
-第二步： get tagged_corpus
+## 第二步： get tagged_corpus
 
     import fgom
     
@@ -166,7 +182,7 @@ origin_tag_filename： 已标记corpus
     fgom.get_tagged_corpus(input_filepath, output_filename)
 
 
-第三步： bootstrapping
+## 第三步： bootstrapping
 
     import fgom    
     
@@ -176,7 +192,7 @@ origin_tag_filename： 已标记corpus
     fgom.bootstrapping(bootstrapping_filename, origin_tag_filename)
 
 
-第四步： train and use 
+## 第四步： train and use 
 
     import fgom
     
@@ -187,3 +203,7 @@ origin_tag_filename： 已标记corpus
     print(["%s/%s" % (word, tag) for word, tag in fgom.tag(sentence, False)])
     print(fgom.parse(sentence))
 
+运行结果
+    
+    ['I-E', 'I-P1', 'OT', 'I-E', 'I-P1', 'OT', 'I-E', 'I-P1']
+    ['味道/I-E', '好/I-P1', '，/OT', '送餐/I-E', '快/I-P1', '，/OT', '分量/I-E', '足/I-P1']
