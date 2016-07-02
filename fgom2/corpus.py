@@ -190,7 +190,7 @@ class BootstrappingHMM:
         # write the init probability
         total = sum(init_num.values())
         for tag, num in sorted(init_num.items()):
-            prob = num / total
+            prob = float(num) / total
             self.__init_prob[tag] = prob
 
         # write the transition probability
@@ -201,7 +201,7 @@ class BootstrappingHMM:
             self.__transition_prob[tag1] = {}
             for tag2 in sorted(tag_dict.keys()):
                 num = tag_dict[tag2]
-                prob = num / total
+                prob = float(num) / total
                 self.__transition_prob[tag1][tag2] = prob
         for key in self.__tags:
             if key not in self.__transition_prob:
@@ -214,7 +214,7 @@ class BootstrappingHMM:
             self.__emit_prob[tag] = {}
             for word in sorted(tag_dict.keys()):
                 num = tag_dict[word]
-                prob = num / total
+                prob = float(num) / total
                 self.__emit_prob[tag][word] = prob
         for key in self.__tags:
             if key not in self.__emit_prob:
@@ -230,6 +230,8 @@ class BootstrappingHMM:
         # initialize
         for tag in self.__tags.keys():
             path_a[tag] = [tag]
+            # print(tag, self.__init_prob.get(tag, self.__infinitesimal))
+            # print(tag, observation[0], self.__emit_prob[tag].get(observation[0], self.__infinitesimal))
             prob_a[tag] = math.log(self.__init_prob.get(tag, self.__infinitesimal)) + \
                           math.log(self.__emit_prob[tag].get(observation[0], self.__infinitesimal))
 

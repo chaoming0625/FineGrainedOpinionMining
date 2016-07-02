@@ -1,9 +1,7 @@
-﻿很快/I-P1	，/OT	好吃/I-P1	，/OT
+很快/I-P1	，/OT	好吃/I-P1	，/OT
 味道/I-E	足/I-P1	，/OT
 量/I-E	大/I-P1
-没有/B-N2	送水/E-N2	,/OT
-没有/B-N2	送水/E-N2	,/OT
-没有/B-N2	送水/E-N2
+没有/B-N2	送水/E-N2	没有/B-N2	送水/E-N2	没有/B-N2	送水/E-N2
 非常/B-P1	快/E-P1	，/OT
 态度/I-E	好/I-P1	。/OT
 方便/I-P1	，/OT
@@ -33,12 +31,6 @@
 味道/I-E	好/I-P1	，/OT
 送餐/I-E	快/I-P1	，/OT
 分量/I-E	足/I-P1
-量/I-E	足/I-P1	，/OT
-好吃/I-P1	，/OT
-送餐/I-E	也/OT	快/I-P1
-特别/B-P1	好吃/E-P1	，/OT
-量/I-E	特大/I-P1	，/OT
-而且/OT	送餐/I-E	特别快/I-P1	，/OT
-特别/B-P1	特别/M-P1	棒/E-P1
-口感/I-E	好/B-P1	的/M-P1	很/E-P1	，/OT
-速度/I-E	快/I-P1	！/OT
+味道/I-E	好/I-P1	，/OT
+送餐/I-E	快/I-P1	，/OT
+分量/I-E	足/I-P1

@@ -52,11 +52,11 @@ def test_use_OpinionMinerHMM():
 
     print(HMM.parse(sentence))
 
+
 if __name__ == "__main__":
     pass
-    # test_GetToTagCorpus()
-    # test_GetTaggedCorpus()
-    # test_BootstrappingMaster()
+    test_GetToTagCorpus()
+    test_GetTaggedCorpus()
+    test_BootstrappingMaster()
     test_train_OpinionMinerHMM()
-    # test_use_OpinionMinerHMM()
-
+    test_use_OpinionMinerHMM()
